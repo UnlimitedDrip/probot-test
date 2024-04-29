@@ -204,8 +204,9 @@ async function createQuestEnvironment(quest, task, context) {
     else if (task === "T5") {
       response = response.Task5.acceptQ1T5;
     }
+    const replacedResponse = response.replace(/\{\{repoURL\}\}/g, response.repoURL);
     issueComment = context.issue({
-      body: response
+      body: replacedResponse
     });
 
     await context.octokit.issues.createComment(issueComment);
